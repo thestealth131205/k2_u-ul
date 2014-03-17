@@ -1,0 +1,90 @@
+<#selectbg_g>###########v5.9########</#>
+
+1,6GHz 4.2.2 release
+
+###########v5.9########
+
+<#selectbg_g>###########v5.7########</#>
+
+Add GPU 2D Up to 266MHZ
+Modify Regulator CPU Mem 125
+ADD Memory 4400MBPS
+ADD L2 OC
+Delete 405MHZ 3D
+
+###########v5.7########
+
+
+<#selectbg_g>###########v5.6########</#>
+
+Add GPU Governor Simple
+Modify Regulator Voltages
+Modify much more
+
+###########v5.6########
+
+<#selectbg_g>###########v5.5########</#>
+
+Add my own Read_Ahead Intelligent Handler
+Lower Wifi Voltages 
+Add MMC Sleep Mode
+Tuned Governors
+
+###########v5.5########
+
+<#selectbg_g>###########v5.1########</#>
+
+Little GPU Push
+Little CPU Push
+
+###########v5.1########
+
+<#selectbg_g>###########v1.8########</#>
+
+Intellidemand FIX
+
+###########v1.8########
+
+<#selectbg_g>###########v1.7########</#>
+
+ADD Intellidemand+
+Modify Governors default
+Modify Ondemand Config
+
+###########v1.7########
+
+<#selectbg_g>###########v1.6########</#>
+
+Modify ReadAhead min 16 max 1024
+Modify WifiModes Tune for Battery
+Modify Tune OnDemand for Battery and Speed
+Modify more
+
+###########v1.6########
+
+<#selectbg_g>###########v1.4########</#>
+
+ADD UC TO CPU SOURCE 0,192Ghz
+ADD UC TO L2 SOURCE 0,192Ghz
+ADD UV
+
+###########v1.4########
+
+
+<#selectbg_g>###########v1.3########</#>
+
+Little Fix
+
+###########v1.3########
+
+<#selectbg_g>###########v1.2########</#>
+
+ADD ONLY CPU OC TO SOURCE 1,566Ghz
+
+###########v1.2########
+
+<#selectbg_g>###########v1.0########</#>
+
+STOCK INITIAL K2 U and K2 UL Kernel
+
+###########v1.0########

@@ -1,0 +1,64 @@
+### LICENSE:
+#
+# Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+### LANGUAGE STRING RESOURCE FILE
+#
+#   Language  : Russian
+#   By        : BrateloSlava
+#
+
+#
+#--- COMMON SYSTEM STRING RESOURCE
+#
+text_ok=OK
+text_next=Далее
+text_back=Назад
+text_yes=Да
+text_no=Нет
+text_about=О программе
+text_calibrating=Утилиты настройки
+text_quit=Быстрая установка
+text_quit_msg=Вы действительно желаете выйти из установки?
+
+#
+#-- CUSTOM STRING RESOURCE
+#
+common.for=для
+
+langtest.title=Язык успешно загружен
+langtest.multiline=Программа установки запускается на английском языке\
+\
+<b>Пожалуйста, нажмите кнопку Спасибо в теме</b> \
+\
+Thestealth
+
+#-- End of string without any backslash for multiline text
+
+welcome.title=Добро пожаловать
+welcome.text1=Вы хотите прервать установку
+welcome.text2=Автором FlashBeats является <b>Thestealth</b>.
+welcome.version=ВЕРСИЯ
+welcome.codename=КОДОВОЕ ИМЯ
+welcome.updated=ОБНОВЛЕНО
+welcome.next=Нажмите Далее для продолжения установки...
+
+terms.title=Условия использования
+terms.desc=Пожалуйста, внимательно прочтите условия использования FlashBeats.
+terms.check=Я соглавен с Условиями использования...
+terms.confirm=Пожалуйста, проверьте соглашение...
+
+changelog.title=История изменений
+changelog.desc=История изменений FlashBeats

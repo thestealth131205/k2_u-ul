@@ -1,0 +1,150 @@
+##
+#
+# AROMA Installer - Installer Script
+#       (c) 2011 by Ahmad Amarullah
+#           amarullz - xda-developers
+#
+#       Version 1.60 - TEST updater-script
+#       FOR LEARNING PORPOSE ONLY
+#
+##
+
+##
+#
+# OLD UPDATER-BINARY
+#
+# Here you can use old command for flashing files, like:
+#  mount
+#  umount
+#  delete_recursive
+#  format
+#  package_extract_dir
+#  set_perm_recursive
+#
+
+## CHECKING Configuration from aroma-config
+#
+# Check it using if else statement, with file_getprop
+# in /tmp/aroma
+#
+# Example:
+# if
+#      file_getprop("/tmp/aroma/customize.prop","item.6.3") == "1"
+# then
+#   ... here the command ...
+# endif;
+#
+
+## INFO COMMAND FOR AROMA
+#
+#-- DIFFERENT BEHAVIOUR
+#
+# set_progress(0.5);
+#    Set Progress position: 0.0 = 0%; 0.5 = 50%; 1.0 = 100%
+#    
+# show_progress(0.2, 400);
+#    show_progress( progress size, number of files to be extracted );
+#    if we had 50 files, and want to "add" 0.2 into progress after all finished
+#    use (0.2, 50)
+#
+# show_progress(0.2, "-2000");
+#    show_progress( progress size, wait for 2000ms );
+#    For show progress with time as progress indicator, use negative value. After 2second progress will add 0.2/20% into the value
+#    use (0.2, "-2000"). Note, use quote for value "-2000"
+#
+# ui_print("@ Title");
+#    Set progress title
+#
+# ui_print("Default Text");
+#    Set Normal Log Text
+#
+##
+
+#####################################################################################################
+#
+# EXAMPLES INSTALLER SCRIPT - It won't flash anything.
+#
+# This script will use run_program("/tmp/aroma/sleep","500"); to wait the command to another command
+# in real installation, you don't need it.... so delete the lines
+#
+#
+ui_print("-Checking Model ID");
+ui_print("-Success!");
+ui_print("-Model ID - One SV (K2u");
+ui_print("-Ok to proceed");
+
+set_progress(0.01);
+ui_print("@Mounting & Formating Devices");
+ifelse(is_mounted("/system") == "/system", unmount("/system"));
+ifelse(is_mounted("/cache") == "/cache", unmount("/cache"));
+
+################EXTRACT SETUP FILES
+ui_print("Extracting files ...");
+if
+  file_getprop("/tmp/aroma-data/kernel.prop","snq") == "no"
+then
+  ui_print("Extracting K2_U Kernel files ...");
+  package_extract_dir("kernel", "/tmp");
+  set_perm(0, 0, 0777, "/tmp/mkbootimg.sh");
+  set_perm(0, 0, 0777, "/tmp/mkbootimg");
+  set_perm(0, 0, 0777, "/tmp/unpackbootimg");
+  set_perm(0, 0, 0777, "/tmp/modclean.sh");
+endif;
+
+set_progress(0.1);
+
+################MOUNT SYSTEM
+ui_print("Mount /system...");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p33", "/system");
+set_progress(0.2);
+
+################DELETE OLD MODULES
+ui_print("Deleting Old Modules...");
+run_program("/tmp/modclean.sh");
+set_progress(0.3);
+
+################COPY NEW MODULES
+ui_print("Copying New Modules");
+ui_print("Setting permissions...");
+package_extract_dir("system", "/system");
+
+################COPY NEW INIT.D
+ui_print("-- installing init.d scripts");
+package_extract_dir("system", "/system");
+ui_print("-- setting permissions on init.d scripts");
+set_perm_recursive(0, 2000, 0777, 0777, "/system/etc/init.d");
+
+################KERNEL PULL/EXTRACT
+ui_print("Pull the boot.img from your phone...");
+run_program("/sbin/busybox", "dd", "if=/dev/block/mmcblk0p20", "of=/tmp/boot.img");
+run_program("/sbin/busybox", "dd", "if=/dev/block/mmcblk0p20", "of=/system/bootextract.img");
+set_progress(0.5);
+
+ui_print("Extract boot.img...");
+run_program("/tmp/unpackbootimg", "-i", "/tmp/boot.img", "-o", "/tmp/");
+set_progress(0.55);
+set_progress(0.65);
+
+################UNMOUNT SYSTEM
+unmount("/system");
+set_progress(0.8);
+
+################REPACK
+ui_print("Repack boot.img with StockBeats Kernel");
+ui_print("Installing kernel...");
+run_program("/tmp/mkbootimg.sh");
+set_progress(0.9);
+
+################KERNEL FLASH
+ui_print("Flashing New boot.img...");
+run_program("/sbin/busybox", "dd", "if=/tmp/newboot.img", "of=/dev/block/mmcblk0p20");
+set_progress(0.95);
+
+################WIPE CACHE
+ui_print("Wiping /cache");
+run_program("/sbin/busybox", "mount", "/cache");
+delete_recursive("/cache/");
+run_program("/sbin/busybox", "umount", "/cache");
+set_progress(1.0);
+
+ui_print("Kernel flashed, enjoy!");

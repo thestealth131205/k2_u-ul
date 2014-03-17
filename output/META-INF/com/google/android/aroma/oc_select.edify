@@ -1,0 +1,37 @@
+###################################################################################################################
+#
+# SHOW LANGUAGE SELECTION
+#
+selectbox(
+  #-- Title
+    "Select OC Kernel",
+  
+  #-- Sub Title
+    "Please select Overclock Kernel:",
+  
+  #-- Icon: <AROMA Resource Dir>/icons/personalize.png or <ThemeDir>/icon.personalize.png
+    "@default",
+  
+  #-- Will be saved in oc_select.prop
+    "oc_select.prop",
+  
+  #---------------------------------[ Selectbox Without Group ]----------------------------------#
+  # TITLE            |  SUBTITLE                                                 | Initial Value #
+  #------------------+-----------------------------------------------------------+---------------#
+
+    "Stock OC K2_UL",            "Only for K2_UL Complete Stock with OC/UC Bravia Engine and Intelligent Read_ahead",                                        1,      #-- selected.0 = 1
+  #--------[ Initial Value = 0: Unselected, 1: Selected, 2: Group Item, 3: Not Visible ]---------#
+);
+if prop("oc_select.prop","selected.0")=="1" then
+  writetmpfile(
+  "kernel.prop",
+  "snq =no\n"
+);
+endif;
+
+if prop("oc_select.prop","selected.0")=="2" then
+  writetmpfile(
+  "kernel.prop",
+  "snq =yes\n"
+);
+endif;
